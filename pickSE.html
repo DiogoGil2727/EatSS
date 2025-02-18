@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <title>Escolha das Refeições</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .day-container { margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; }
+        .meal-options { display: flex; gap: 10px; margin-top: 5px; }
+        .meal-options select { display: none; }
+        .error { color: red; display: none; }
+    </style>
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+        
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
+                <a href="" class="navbar-brand p-0">
+                    <h1 class="text-primary m-0">
+                        <span class="text-eat">Eat</span><span class="text-simple">Simple</span>
+                    </h1>
+                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0 pe-4">
+                        <a href="about.html" class="nav-item nav-link">Sobre nós</a>
+                        <a href="index.html" class="nav-item nav-link">Menu</a>
+                        <a href="index.html" class="nav-item nav-link">Contacta-nos</a>
+                    </div>
+                    <a href="" class="btn btn-primary py-2 px-4">Encomendar</a>
+                </div>
+            </nav>
+
+            <div class="container-xxl py-5 bg-dark hero-header mb-5">
+                <div class="container text-center my-5 pt-5 pb-4">
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">Refeições para a Semana</h1>
+                    <nav aria-label="breadcrumb">
+                        
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+        <div class="container">
+            <!-- Contêiner único que junta o formulário e os preços -->
+            <div class="meal-price-container">
+                
+                <!-- Formulário de escolha das refeições -->
+                <form id="meal-form" class="meal-form-container">
+                    <h4>Podes escolher mais que uma refeição por dia</h4>
+                    <div id="days-container"></div>
+                    <p class="error" id="error-message">Precisas de selecionar, pelo menos, 7 refeições para este plano. Se pretendes escolher menos, escolhe o "Plano Personalizado"...</p>
+                    <button type="button" id="back-button">Regressar</button>
+                    <button type="submit">Confirmar Refeições</button>
+                </form>
+        
+                <!-- Container para os preços -->
+                <div class="price-container">
+                    <h4>Preço por Dia</h4>
+                    <div id="price-per-day">Nenhum preço calculado ainda.</div> <!-- Aqui vai aparecer os preços do dia -->
+                    <h4>Total da Semana</h4>
+                    <div id="total-week-price">€ 0.00</div> <!-- O total da semana -->
+                </div>
+                
+            </div>
+        </div>
+
+    <script>
+        const meals = {
+    "pequeno": [
+        { name: "Opção 1", price: 2.5 },
+        { name: "Opção 2", price: 3 },
+        { name: "Opção 3", price: 2.8 },
+        { name: "Opção 4", price: 3.5 },
+        { name: "Opção 5", price: 3.5 },
+        { name: "Opção 6", price: 3.5 },
+        { name: "Opção 7", price: 3.5 },
+        { name: "Opção 8", price: 3.5 }
+    ],
+    "almoco": [
+        { name: "Wrap Mediterrâneo", price: 5 },
+        { name: "Wrap Veggie Umani", price: 4.5 },
+        { name: "Opção 3", price: 6 },
+        { name: "Opção 4", price: 6 },
+        { name: "Opção 5", price: 6 },
+        { name: "Opção 6", price: 6 },
+        { name: "Opção 7", price: 6 },
+        { name: "Opção 8", price: 6 }
+    ],
+    "jantar": [
+        { name: "Opção 1", price: 7 },
+        { name: "Opção 2", price: 6.5 },
+        { name: "Opção 3", price: 6.8 },
+        { name: "Opção 4", price: 6 },
+        { name: "Opção 5", price: 6 },
+        { name: "Opção 6", price: 6 },
+        { name: "Opção 7", price: 6 },
+        { name: "Opção 8", price: 6 }
+    ]
+};
+
+// Função para calcular os preços
+function calculatePrice() {
+    let totalDailyPrice = 0; // Para somar os preços diários
+    let dailyPrices = []; // Array para armazenar os preços diários
+    let totalPrice = 0;
+
+    // Para cada dia da semana (assumindo que há 7 dias)
+    for (let day = 1; day <= 7; day++) {
+        let dayTotal = 0; // Preço total do dia
+        
+        // Encontrar os selects para o dia atual
+        let selects = document.querySelectorAll(`#day-${day} .meal-select`);
+        selects.forEach(select => {
+            const selectedMealName = select.value; // Nome da refeição selecionada
+            if (selectedMealName) {
+                // Identificar o tipo de refeição (pequeno, almoco, jantar)
+                const mealType = select.classList[1]; // Exemplo: pequeno, almoco, jantar
+                const selectedMeal = meals[mealType].find(meal => meal.name === selectedMealName);
+                if (selectedMeal) {
+                    dayTotal += selectedMeal.price; // Adiciona o preço da refeição ao total do dia
+                }
+            }
+        });
+        
+        dailyPrices.push(dayTotal); // Armazena o preço total do dia
+        totalDailyPrice += dayTotal; // Adiciona ao total da semana
+    }
+
+    // Atualiza a exibição do preço de cada dia
+    let pricePerDayHtml = '';
+    dailyPrices.forEach((price, index) => {
+        pricePerDayHtml += `<p>Preço Dia ${index + 1}: € ${price.toFixed(2)}</p>`;
+    });
+    document.getElementById("price-per-day").innerHTML = pricePerDayHtml || 'Nenhum preço calculado ainda.'; // Caso não tenha preços
+
+    // Atualiza o preço total da semana
+    document.getElementById("total-week-price").textContent = `€ ${totalDailyPrice.toFixed(2)}`;
+}
+
+// Escuta a mudança nos selects (onde o usuário escolhe as refeições)
+document.querySelectorAll(".meal-select").forEach(select => {
+    select.addEventListener("change", calculatePrice); // Verifica as mudanças na seleção
+});
+
+// Inicializa os preços assim que a página for carregada
+window.onload = calculatePrice;
+
+
+
+function updateMealPrice() {
+    let totalPrice = 0; // Inicializa o preço total
+
+    // Percorre todos os checkboxes de refeição
+    document.querySelectorAll('.meal-checkbox').forEach(checkbox => {
+        const select = checkbox.parentNode.nextElementSibling;
+
+        // Se o checkbox está marcado
+        if (checkbox.checked) {
+            // Selecione o valor da refeição (do select)
+            const selectedMealName = select.value;
+            if (selectedMealName) {
+                const mealType = select.classList[1]; // Exemplo: 'pequeno', 'almoco', 'jantar'
+                const selectedMeal = meals[mealType].find(meal => meal.name === selectedMealName);
+                if (selectedMeal) {
+                    totalPrice += selectedMeal.price; // Adiciona o preço da refeição ao total
+                }
+            }
+        }
+    });
+
+    // Exibe o total atualizado
+    document.getElementById("total-week-price").textContent = `€ ${totalPrice.toFixed(2)}`;
+}
+
+// Evento para atualizar o preço quando o checkbox é alterado
+document.querySelectorAll('.meal-checkbox').forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+        const select = this.parentNode.nextElementSibling;
+
+        // Exibe ou oculta o select dependendo se o checkbox está marcado
+        select.style.display = this.checked ? 'inline-block' : 'none';
+
+        // Chama a função para calcular o preço atualizado
+        updateMealPrice();
+    });
+});
+
+// Chamar a função no início para garantir que os preços sejam calculados se houver refeições selecionadas ao carregar a página
+calculatePrice();
+
+
+const daysContainer = document.getElementById("days-container");
+for (let i = 1; i <= 7; i++) {
+    const dayDiv = document.createElement("div");
+    dayDiv.classList.add("day-container");
+    dayDiv.id = `day-${i}`; // Atribui um id único para cada dia
+    dayDiv.innerHTML = `<strong>Dia ${i}</strong>
+        <div class="meal-options">
+            <label><input type="checkbox" class="meal-checkbox" data-meal="pequeno"> Pequeno-almoço</label>
+            <select class="meal-select pequeno"></select>
+            <label><input type="checkbox" class="meal-checkbox" data-meal="almoco"> Almoço</label>
+            <select class="meal-select almoco"></select>
+            <label><input type="checkbox" class="meal-checkbox" data-meal="jantar"> Jantar</label>
+            <select class="meal-select jantar"></select>
+        </div>`;
+    daysContainer.appendChild(dayDiv);
+}
+
+document.querySelectorAll(".meal-checkbox").forEach(checkbox => {
+    checkbox.addEventListener("change", function() {
+        const select = this.parentNode.nextElementSibling;
+
+        // Exibe o select apenas se o checkbox for marcado
+        select.style.display = this.checked ? "inline-block" : "none";
+
+        if (this.checked && select.innerHTML === "") {
+            meals[this.dataset.meal].forEach(meal => {
+                const option = document.createElement("option");
+                option.textContent = meal.name;
+                option.value = meal.name;
+                select.appendChild(option);
+            });
+        }
+
+        // Calcular o preço sempre que o checkbox for alterado (marcado/desmarcado)
+        calculatePrice();
+    });
+});
+
+
+        document.getElementById("meal-form").addEventListener("submit", function(event) {
+            let totalMeals = 0;
+            document.querySelectorAll(".meal-checkbox:checked").forEach(() => totalMeals++);
+            if (totalMeals < 7) {
+                document.getElementById("error-message").style.display = "block";
+                event.preventDefault();
+            }
+        });
+        
+    </script>
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Empresa</h4>
+                    <a class="btn btn-link" href="">Sobre nós</a>
+                    <a class="btn btn-link" href="">Contacta-nos</a>
+                    <a class="btn btn-link" href="">Encomendar</a>
+                    <a class="btn btn-link" href="">Politica de privacidade</a>
+                    <a class="btn btn-link" href="">Termos e condições</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Contactos</h4>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+351 937097975</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>BeebsCooking@gmail.com</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Newsletter</h4>
+                    <p>Recebe todas as novidades e aproveita descontos exclusivos</p>
+                    <div class="position-relative mx-auto" style="max-width: 400px;">
+                        <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Inscrever-me</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="#">EatSimple</a>, All Right Reserved. 
+                        
+                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                        Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="footer-menu">
+                            <a href="">Menu</a>
+                            <a href="">Help</a>
+                            <a href="">FQAs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="lib/wow/wow.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/counterup/counterup.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="lib/tempusdominus/js/moment.min.js"></script>
+<script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+
+
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
+</body>
+<style>
+    /* Estilização geral do formulário */
+#meal-form {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: auto;
+}
+
+/* Contêiner dos dias */
+.day-container {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-left: 5px solid #ff9f1c;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Título dos dias */
+.day-container strong {
+    font-size: 18px;
+    color: #333;
+}
+
+/* Checkbox e labels */
+.meal-options label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    color: #555;
+    cursor: pointer;
+}
+
+/* Select estilizado */
+.meal-select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #fff;
+    display: none;
+}
+
+/* Mensagem de erro */
+#error-message {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Botão de envio */
+#meal-form button {
+    background: #ff9f1c;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s;
+}
+
+#meal-form button:hover {
+    background: #ff7f00;
+}
+
+#back-button {
+    background: #6c757d !important; /* Cinza */
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    transition: background 0.3s;
+}
+
+#back-button:hover {
+    background: #545b62 !important; /* Cinza escuro */
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Adiciona espaçamento entre os dois contêineres */
+}
+
+.meal-form-container {
+    flex: 1; /* O formulário ocupa o restante do espaço */
+    padding: 20px;
+}
+
+.price-container {
+    flex: 0.3; /* O container de preços ocupa 30% da largura */
+    padding-right: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.container {
+    display: flex;
+    justify-content: center; /* Centraliza o conteúdo */
+    padding: 20px;
+}
+
+.meal-price-container {
+    display: flex;
+    gap: 20px; /* Espaçamento entre o formulário e os preços */
+    background: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.meal-form-container {
+    flex: 0.7; /* O formulário ocupa 70% da largura */
+}
+
+.price-container {
+    flex: 0.3; /* A área de preços ocupa 30% da largura */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#price-per-day, #total-week-price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+</style>
+</html>
