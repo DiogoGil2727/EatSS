@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>EatSimple</title>
+    <title>Restoran - Bootstrap Restaurant Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -59,9 +59,9 @@
                     <div class="navbar-nav ms-auto py-0 pe-4">
                         <a href="about.html" class="nav-item nav-link">Sobre nós</a>
                         <a href="index.html" class="nav-item nav-link">Menu</a>
-                        <a href="https://www.instagram.com/eatsimple___/" class="nav-item nav-link">Contacta-nos</a>
+                        <a href="index.html" class="nav-item nav-link">Contacta-nos</a>
                     </div>
-                    <a href="Order.html" class="btn btn-primary py-2 px-4">Encomendar</a>
+                    <a href="pickSE.html" class="btn btn-primary py-2 px-4">Encomendar</a>
                 </div>
             </nav>
 
@@ -164,6 +164,16 @@
                 display: block;
                 margin-left: auto;
             }
+            .btn-back {
+                background: #9d9d9d;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                display: block;
+                margin-right: auto;
+            }
 
             img {
                 width: 350px;
@@ -173,7 +183,113 @@
         </style>
         
         <!-- Form End -->
-        
+
+        <!-- NEW NEW NEW NEW NEW NEW NEW NEW -->
+
+        <!-- Segunda Etapa do Formulário -->
+        <div class="form-step-2" style="display: none;">
+            <h2>Escolhe o teu Plano</h2>
+            <div class="plan-options">
+                <button class="plan-btn" data-plan="personalizado">Plano Personalizado</button>
+                <button class="plan-btn" data-plan="semanal">Plano Semanal (7 Dias)</button>
+                <button class="plan-btn" data-plan="mensal">Plano Mensal (30 Dias)</button>
+            </div>
+            <div class="button-container">
+                <button class="btn-back" id="back-to-form">Regressar</button>
+                <button class="btn-next" id="continue-plan">Continuar</button>
+            </div>
+        </div>
+
+        <script>
+            document.querySelector(".btn-next").addEventListener("click", function () {
+                document.querySelector(".form-container").style.display = "none";
+                document.querySelector(".form-step-2").style.display = "block";
+            });
+
+            // Lógica para o botão "Continuar" na segunda parte
+document.querySelector("#continue-plan").addEventListener("click", function () {
+    const selectedPlan = document.querySelector(".plan-btn.selected");
+
+    if (selectedPlan && selectedPlan.getAttribute("data-plan") === "semanal") {
+        // Se o plano selecionado for "Plano Semanal", redireciona para "pick.html"
+        window.location.href = "pickSE.html";
+    } else {
+        // Se não for o "Plano Semanal", exibe um alerta
+        alert("Por favor, selecione o 'Plano Semanal' para continuar.");
+    }
+});
+
+            document.querySelectorAll(".plan-btn").forEach(button => {
+                button.addEventListener("click", function () {
+                    document.querySelectorAll(".plan-btn").forEach(btn => btn.classList.remove("selected"));
+                    this.classList.add("selected");
+                });
+            });
+
+            document.querySelector("#back-to-form").addEventListener("click", function () {
+            document.querySelector(".form-step-2").style.display = "none";
+            document.querySelector(".form-container").style.display = "flex"; // Usa flex para manter o layout correto
+        });
+        </script>
+
+        <style>
+            .form-step-2 {
+                width: 90%;
+                max-width: 900px;
+                background: white;
+                padding: 40px;
+                text-align: center;
+                border-radius: 10px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                margin: 0 auto;
+            }
+            
+            .plan-options {
+                display: flex;
+                gap: 20px;
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+            
+            .plan-btn {
+                background: #f4f4f4;
+                border: 2px solid #ddd;
+                padding: 15px;
+                margin-top: 15px;
+                margin-bottom: 15px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 18px;
+            }
+            
+            .plan-btn.selected {
+                border-color: #4CAF50;
+                background: #e8f5e9;
+            }
+            .button-container {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 20px;
+            }
+            
+            .btn-back {
+                background: #9d9d9d;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .btn-next {
+                background: #4CAF50;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+        </style>
 
 
         
@@ -185,9 +301,9 @@
                 <div class="row g-5">
                     <div class="col-lg-3 col-md-6">
                         <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Empresa</h4>
-                        <a class="btn btn-link" href="about.html">Sobre nós</a>
-                        <a class="btn btn-link" href="https://www.instagram.com/eatsimple___/">Contacta-nos</a>
-                        <a class="btn btn-link" href="Order.html">Encomendar</a>
+                        <a class="btn btn-link" href="">Sobre nós</a>
+                        <a class="btn btn-link" href="">Contacta-nos</a>
+                        <a class="btn btn-link" href="">Encomendar</a>
                         <a class="btn btn-link" href="">Politica de privacidade</a>
                         <a class="btn btn-link" href="">Termos e condições</a>
                     </div>
@@ -196,7 +312,7 @@
                         <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+351 937097975</p>
                         <p class="mb-2"><i class="fa fa-envelope me-3"></i>BeebsCooking@gmail.com</p>
                         <div class="d-flex pt-2">
-                            <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/profile.php?id=61571015889979"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
@@ -222,7 +338,7 @@
                         </div>
                         <div class="col-md-6 text-center text-md-end">
                             <div class="footer-menu">
-                                <a href="index.html">Menu</a>
+                                <a href="">Menu</a>
                                 <a href="">Help</a>
                                 <a href="">FQAs</a>
                             </div>
@@ -318,4 +434,5 @@
 }
 </style>
 </html>
+
 
