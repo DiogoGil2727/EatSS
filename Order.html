@@ -439,6 +439,202 @@ document.querySelector("#continue-plan").addEventListener("click", function () {
         width: auto; /* O botão volta ao tamanho padrão */
     }
 }
+	@media (max-width: 767px) {
+    .form-container {
+        flex-direction: column; /* Coloca os itens do formulário em uma coluna */
+        padding: 20px; /* Menos padding para caber melhor em telas pequenas */
+        margin-top: 20px; /* Adiciona um pouco de espaçamento acima */
+    }
+
+    .form-group {
+        flex-direction: column; /* Alinha os itens verticalmente */
+        margin-bottom: 10px; /* Diminui o espaço entre os campos */
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%; /* Garante que os campos de input e select ocupem toda a largura disponível */
+    }
+
+    img {
+        width: 60%; /* Faz com que a imagem ocupe toda a largura disponível na tela */
+        margin-left: 0; /* Remove o margin esquerdo */
+        margin-top: 20px; /* Dá um espaçamento superior para a imagem */
+    }
+
+    .btn-next {
+        width: 100%; /* Faz com que o botão "Próximo" ocupe toda a largura */
+        padding: 12px; /* Aumenta o tamanho do botão para facilitar o clique */
+    }
+}
+
+/* Estilos Gerais */
+body {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Ajustes Gerais */
+.container-xxl {
+    width: 100%;
+    padding: 0 15px;
+}
+
+/* Responsividade para Smartphones (até 767px) */
+@media (max-width: 767px) {
+    .form-container {
+        flex-direction: column; /* Empilhar elementos */
+        padding: 20px;
+        margin: 20px auto;
+        width: 90%;
+        max-width: 400px;
+    }
+
+    .form-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .btn-next,
+    .btn-back {
+        width: 100%;
+        padding: 14px;
+        font-size: 16px;
+    }
+
+    img {
+        width: 80%;
+        height: auto;
+        margin: 20px auto;
+        display: block;
+    }
+
+    .form-step-2 {
+        width: 90%;
+        padding: 25px;
+        text-align: center;
+    }
+
+    .plan-options {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .plan-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .button-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Responsividade para Tablets (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .form-container {
+        flex-direction: column;
+        width: 80%;
+        padding: 30px;
+    }
+
+    .form-group {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 14px;
+        font-size: 16px;
+    }
+
+    .btn-next,
+    .btn-back {
+        width: auto;
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+
+    img {
+        width: 60%;
+        margin: 20px auto;
+        display: block;
+    }
+
+    .form-step-2 {
+        width: 80%;
+        padding: 30px;
+    }
+
+    .plan-options {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .plan-btn {
+        width: 45%;
+        padding: 14px;
+        font-size: 18px;
+    }
+
+    .button-container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+/* Ajustes para Desktop (>1024px) */
+@media (min-width: 1025px) {
+    .form-container {
+        flex-direction: row;
+        width: 70%;
+        padding: 40px;
+    }
+
+    .form-group {
+        flex-direction: row;
+        gap: 15px;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 48%;
+    }
+
+    img {
+        width: 350px;
+        margin-left: 40px;
+    }
+
+    .form-step-2 {
+        width: 70%;
+        padding: 40px;
+    }
+
+    .plan-options {
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .plan-btn {
+        width: auto;
+        padding: 16px;
+        font-size: 18px;
+    }
+}
 </style>
 </html>
 
