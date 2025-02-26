@@ -213,9 +213,16 @@ document.querySelector("#continue-plan").addEventListener("click", function () {
     if (selectedPlan && selectedPlan.getAttribute("data-plan") === "semanal") {
         // Se o plano selecionado for "Plano Semanal", redireciona para "pick.html"
         window.location.href = "pickSE.html";
-    } else {
-        // Se não for o "Plano Semanal", exibe um alerta
-        alert("Por favor, selecione o 'Plano Semanal' para continuar.");
+    } if (selectedPlan && selectedPlan.getAttribute("data-plan") === "semanal") {
+        // Se o plano selecionado for "Plano Semanal", redireciona para "pick.html"
+        window.location.href = "pickSE.html";
+    } if (selectedPlan && selectedPlan.getAttribute("data-plan") === "personalizado") {
+        // Se o plano selecionado for "Plano Semanal", redireciona para "pick.html"
+        window.location.href = "pickDI.html";
+    }
+    if (selectedPlan && selectedPlan.getAttribute("data-plan") === "mensal") {
+        // Se o plano selecionado for "Plano Semanal", redireciona para "pick.html"
+        window.location.href = "pickME.html";
     }
 });
 
