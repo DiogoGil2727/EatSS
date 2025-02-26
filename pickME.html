@@ -497,5 +497,132 @@ h4{
     color: #333;
     margin-top: 10px;
 }
+    /* Responsividade para dispositivos móveis (menos de 768px) */
+@media (max-width: 767px) {
+    .container {
+        flex-direction: column;
+        padding: 10px;
+    }
+    
+    .meal-price-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .meal-form-container {
+        flex: 1;
+        padding: 10px;
+    }
+
+    .price-container {
+        flex: 1;
+        padding: 10px;
+        margin-top: 20px;
+    }
+
+    .meal-select {
+        width: 100%;
+        padding: 8px;
+    }
+
+    #meal-form button {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    #back-button {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .error {
+        font-size: 14px;
+    }
+}
+
+/* Responsividade para tablets (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .meal-price-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .meal-form-container {
+        flex: 1;
+        padding: 15px;
+    }
+
+    .price-container {
+        flex: 1;
+        padding: 15px;
+    }
+
+    .meal-select {
+        width: 100%;
+        padding: 10px;
+    }
+
+    #meal-form button {
+        font-size: 18px;
+        padding: 12px 20px;
+    }
+
+    #back-button {
+        font-size: 18px;
+        padding: 12px 20px;
+    }
+
+    .error {
+        font-size: 16px;
+    }
+}
+
+/* Responsividade para desktops (1024px em diante) */
+@media (min-width: 1024px) {
+    .container {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+    }
+
+    .meal-price-container {
+        display: flex;
+        gap: 20px;
+    }
+
+    .meal-form-container {
+        flex: 0.7;
+        padding: 20px;
+    }
+
+    .price-container {
+        flex: 0.3;
+        padding: 20px;
+    }
+
+    .meal-select {
+        width: 100%;
+        padding: 12px;
+    }
+
+    #meal-form button {
+        font-size: 20px;
+        padding: 14px 24px;
+    }
+
+    #back-button {
+        font-size: 20px;
+        padding: 14px 24px;
+    }
+
+    .error {
+        font-size: 18px;
+    }
+}
 </style>
 </html>
