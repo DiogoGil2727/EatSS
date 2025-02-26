@@ -570,7 +570,74 @@ function calculatePrices() {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+    @media (max-width: 1024px) {
+    .container {
+        flex-direction: column; /* Empilhar elementos em tablets */
+        align-items: center;
+        width: 90%;
+    }
+
+    .meal-price-container {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .meal-form-container,
+    .price-container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .meal-options {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .meal-select {
+        width: 100%;
+    }
+
+    #generate-days,
+    .CARA,
+    #back-button {
+        width: 100%;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    h4 {
+        font-size: 18px;
+    }
+
+    .day-container {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .meal-options {
+        gap: 5px;
+    }
+
+    .meal-select,
+    #num-days {
+        width: 100%;
+    }
+
+    #generate-days,
+    .CARA,
+    #back-button {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
     </style>
-</style>
+
 
 </html>
