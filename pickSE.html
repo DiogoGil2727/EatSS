@@ -499,6 +499,82 @@ h4{
     color: #333;
     margin-top: 10px;
 }
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .meal-price-container {
+            flex-direction: column; /* Empilha o formulário e os preços em telas de tablets */
+            width: 100%;
+        }
+
+        .meal-form-container {
+            padding: 15px;
+            width: 100%;
+        }
+
+        .price-container {
+            padding: 15px;
+            width: 100%;
+        }
+
+        #meal-form {
+            max-width: 700px; /* Ajusta a largura do formulário em tablets */
+            margin: 20px auto;
+        }
+
+        /* Ajusta o título dos dias */
+        .day-container strong {
+            font-size: 16px;
+        }
+
+        /* Ajuste no botão */
+        #meal-form button {
+            font-size: 16px;
+            padding: 10px 15px;
+        }
+
+        /* Ajustes no tamanho do preço */
+        #price-per-day, #total-week-price {
+            font-size: 22px;
+        }
+    }
+
+    /* Responsividade para telas menores que 768px (Móveis) */
+    @media (max-width: 768px) {
+        .meal-price-container {
+            flex-direction: column; /* Empilha o formulário e os preços */
+            width: 100%;
+        }
+
+        .meal-form-container {
+            padding: 10px;
+            width: 100%;
+        }
+
+        .price-container {
+            padding: 10px;
+            width: 100%;
+        }
+
+        #meal-form {
+            max-width: 100%; /* Formulário ocupa toda a largura */
+            margin: 10px;
+        }
+
+        /* Ajuste no título dos dias */
+        .day-container strong {
+            font-size: 14px;
+        }
+
+        /* Ajuste nos botões */
+        #meal-form button {
+            font-size: 14px;
+            padding: 10px;
+        }
+
+        /* Ajustes no tamanho do preço */
+        #price-per-day, #total-week-price {
+            font-size: 18px;
+        }
+    }
 </style>
 </html>
 
