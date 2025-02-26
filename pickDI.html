@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Escolha das Refeições</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <link href="img/favicon.ico" rel="icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-xxl bg-white p-0">
+        <div class="container-xxl position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
+                <a href="" class="navbar-brand p-0">
+                    <h1 class="text-primary m-0">
+                        <span class="text-eat">Eat</span><span class="text-simple">Simple</span>
+                    </h1>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0 pe-4">
+                        <a href="about.html" class="nav-item nav-link">Sobre nós</a>
+                        <a href="index.html" class="nav-item nav-link">Menu</a>
+                        <a href="index.html" class="nav-item nav-link">Contacta-nos</a>
+                    </div>
+                    <a href="Order.html" class="btn btn-primary py-2 px-4">Encomendar</a>
+                </div>
+            </nav>
+
+            <div class="container-xxl py-5 bg-dark hero-header mb-5">
+                <div class="container text-center my-5 pt-5 pb-4">
+                    <h2 class="display-3 text-white mb-3 animated slideInDown">Número de Refeições personalizado </h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <form id="meal-form">
+                <h4>Escolhe o número de dias e o número de refeições por dia</h4>
+                <label for="num-days">Número de dias:</label>
+                <input type="number" id="num-days" name="num-days" min="1" max="29" value="1">
+                <button type="button" id="generate-days">Gerar Dias</button>
+                
+                <div id="days-container"></div>
+                
+                <a href="Order.html">
+                    <button type="button" id="back-button">Regressar</button>
+                </a>
+                
+                <button type="submit" class="CARA">Confirmar Refeições</button>
+
+            </form>
+            <div class="price-container">
+                <h4>Preço por Dia</h4>
+                <div id="price-per-day">€ 0.00</div> <!-- Aqui vai aparecer os preços do dia -->
+                <h4>Total da Semana</h4>
+                <div id="total-week-price">€ 0.00</div> <!-- O total da semana -->
+            </div>
+            
+        </div>
+        
+        
+        <script>
+
+function calculatePrices() {
+            let totalPrice = 0;
+            const days = document.querySelectorAll('.day-container');
+            
+            days.forEach(day => {
+                let dailyTotal = 0;
+                day.querySelectorAll('.meal-checkbox').forEach(checkbox => {
+                    if (checkbox.checked) {
+                        const mealType = checkbox.dataset.meal;
+                        dailyTotal += mealPrices[mealType] || 0;
+                    }
+                });
+                totalPrice += dailyTotal;
+            });
+
+    
+    document.getElementById('price-per-day').textContent = `€ ${totalPrice / days.length || 0.00}`;
+    document.getElementById('total-week-price').textContent = `€ ${totalPrice.toFixed(2)}`;
+}
+
+            const meals = {
+                "pequeno-almoço": ["Opção 1", "Opção 2", "Opção 3"],
+                "almoco": ["Wrap Mediterrâneo", "Wrap Veggie Umani", "Opção 3"],
+                "jantar": ["Opção 1", "Opção 2", "Opção 3"]
+            };
+    
+            document.getElementById('generate-days').addEventListener('click', () => {
+    const numDays = document.getElementById('num-days').value;
+    const daysContainer = document.getElementById('days-container');
+    daysContainer.innerHTML = ''; // Limpa os dias existentes
+
+    for (let i = 1; i <= numDays; i++) {
+        const dayDiv = document.createElement("div");
+        dayDiv.classList.add("day-container");
+        dayDiv.innerHTML = `
+            <strong>Dia ${i}</strong>
+            <div class="meal-options">
+                <label>
+                    <input type="checkbox" class="meal-checkbox" data-meal="pequeno-almoço"> Pequeno-almoço
+                </label>
+                <select class="meal-select pequeno-almoço" disabled></select>
+
+                <label>
+                    <input type="checkbox" class="meal-checkbox" data-meal="almoco"> Almoço
+                </label>
+                <select class="meal-select almoco" disabled></select>
+
+                <label>
+                    <input type="checkbox" class="meal-checkbox" data-meal="jantar"> Jantar
+                </label>
+                <select class="meal-select jantar" disabled></select>
+            </div>
+        `;
+        daysContainer.appendChild(dayDiv);
+    }
+
+    // Adiciona eventos aos checkboxes para exibir os selects e preenchê-los corretamente
+    document.querySelectorAll('.meal-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const select = this.parentElement.nextElementSibling; // Pega o select correto
+            if (this.checked) {
+                select.style.display = "inline-block";
+                select.innerHTML = ""; // Limpa antes de adicionar
+                select.disabled = false; // Ativa o select
+                meals[this.dataset.meal].forEach(meal => {
+                    const option = document.createElement("option");
+                    option.textContent = meal;
+                    select.appendChild(option);
+                });
+            } else {
+                select.style.display = "none";
+                select.innerHTML = ""; // Remove opções ao desmarcar
+                select.disabled = true; // Desativa o select
+            }
+        });
+    });
+    calculatePrices();
+});
+
+            const mealPrices = {
+    "pequeno-almoço": 2.50,
+    "almoco": 5.00,
+    "jantar": 4.50
+};
+
+
+
+
+
+
+    
+    
+        </script>
+
+        <style>
+            .container {
+                width: 50%;
+                margin: auto;
+                padding: 20px;
+            }
+            .day-container {
+                margin-top: 10px;
+               
+            }
+            .meal-options {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+            .meal-options label {
+                white-space: nowrap;
+            }
+            .meal-select {
+                min-width: 150px;
+                display: none; /* Oculto por padrão */
+            }
+            .price-container {
+    flex: 0.7; /* A área de preços ocupa 30% da largura */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+        </style>
+    
+
+    
+
+    
+
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+
+
+<!-- Footer Start -->
+<div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container py-5">
+        <div class="row g-5">
+            <div class="col-lg-3 col-md-6">
+                <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Empresa</h4>
+                <a class="btn btn-link" href="">Sobre nós</a>
+                <a class="btn btn-link" href="">Contacta-nos</a>
+                <a class="btn btn-link" href="">Encomendar</a>
+                <a class="btn btn-link" href="">Politica de privacidade</a>
+                <a class="btn btn-link" href="">Termos e condições</a>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Contactos</h4>
+                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+351 937097975</p>
+                <p class="mb-2"><i class="fa fa-envelope me-3"></i>BeebsCooking@gmail.com</p>
+                <div class="d-flex pt-2">
+                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Newsletter</h4>
+                <p>Recebe todas as novidades e aproveita descontos exclusivos</p>
+                
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="copyright">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    &copy; <a class="border-bottom" href="#">EatSimple</a>, All Right Reserved. 
+                    
+                    <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                    Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <div class="footer-menu">
+                        <a href="">Menu</a>
+                        <a href="">Help</a>
+                        <a href="">FQAs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="lib/wow/wow.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/counterup/counterup.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="lib/tempusdominus/js/moment.min.js"></script>
+<script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+</body>
+
+<style>
+.container {
+    display: flex;
+    justify-content: center; /* Centraliza o conteúdo */
+    padding: 20px;
+    width: 150%;
+    display: flex;
+    gap: 20px; /* Espaçamento entre o formulário e os preços */
+    
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+
+/* Divisão do formulário e preços */
+.meal-price-container {
+    display: flex;
+    gap: 30px; /* Adiciona espaço entre o formulário e a área do preço */
+}
+
+/* Formulário */
+.meal-form-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    flex: 1; /* Faz o formulário ocupar o restante do espaço */
+}
+
+.meal-form-container h4 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.meal-form-container label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+#num-days {
+    width: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+
+
+#generate-days {
+    margin-top: 10px;
+}
+
+/* Preço */
+.price-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Define a largura da área do preço */
+    flex-shrink: 0; /* Evita que a área de preço encolha */
+}
+
+.price-container h4 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+#price-per-day, #total-week-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* Botões */
+
+
+#generate-days{
+    width: 100%; 
+    max-width: 200px; 
+    margin: 15px auto; 
+    display: block;
+}
+
+#generate-days {
+    display: inline-block; /* Assegura que o botão seja exibido corretamente */
+    background-color: #ff9f1c;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px; /* Dá espaçamento entre os outros elementos */
+}
+
+#generate-days:hover {
+    background-color: #ff7f00;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.CARA {
+    background: #ff9f1c;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s;
+}
+
+.CARA:hover {
+    background: #ff7f00;
+}
+
+
+
+
+
+#back-button {
+    background: #6c757d !important; /* Cinza */
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    transition: background 0.3s;
+}
+
+#back-button:hover {
+    background: #545b62 !important; /* Cinza escuro */
+}
+
+#days-container {
+    margin-top: 20px;
+}
+
+.meal-day {
+    display: flex;
+    align-items: center; /* Alinha os itens na mesma linha */
+    margin-bottom: 10px; /* Espaçamento entre os dias */
+}
+
+.meal-day label {
+    margin-right: 10px; /* Espaço entre o "Dia X" e a checkbox */
+}
+
+.meal-day input[type="checkbox"] {
+    margin-right: 10px; /* Espaço entre a checkbox e o nome da refeição */
+}
+
+.meal-day span {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.meal-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .day-container {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            border-left:5px solid #ff9f1c;
+        }
+        .meal-options {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+            flex-direction: column;
+            
+        }
+        .meal-options label {
+            font-weight: 500;
+            font-size: 16px;
+        }
+        .meal-select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .meal-checkbox {
+            margin-right: 10px;
+        }
+        
+        .price-container {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            text-align: center;
+        }
+        .price-container h4 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .price-container div {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        .navbar {
+            background-color: #333;
+        }
+        .navbar a.nav-item.nav-link {
+            color: white;
+            margin-right: 15px;
+            font-weight: 500;
+        }
+        .navbar a.nav-item.nav-link:hover {
+            color: #f0a500;
+        }
+        .navbar-brand h1 {
+            font-size: 30px;
+            font-weight: 600;
+            color: white;
+        }
+        .navbar-brand h1 span.text-primary {
+            color: #f0a500;
+        }
+        .hero-header {
+            background-color: #007bff;
+            color: white;
+            padding: 60px 0;
+        }
+        
+
+
+
+        #bot {
+    width: 100%; 
+    max-width: 500px; 
+    margin: 15px auto; 
+    display: block;
+}
+
+#bot {
+    display: inline-block; /* Assegura que o botão seja exibido corretamente */
+    background-color: #6200ff;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px; /* Dá espaçamento entre os outros elementos */
+}
+
+#bot:hover {
+    background-color: #ff9a0d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+    </style>
+</style>
+
+</html>
