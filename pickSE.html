@@ -91,7 +91,8 @@
                         <button type="button" id="back-button">Regressar</button>
                     </a>
                     
-                    <button type="submit">Confirmar Refeições</button>
+                    <button type="submit" id="confirm-button">Confirmar Refeições</button>
+
                 </form>
         
                 <!-- Container para os preços -->
@@ -106,6 +107,18 @@
         </div>
 
     <script>
+
+document.querySelector("form").addEventListener("submit", function(event) {
+        // Impede que o formulário seja enviado imediatamente (caso você queira fazer algo antes)
+        event.preventDefault();
+
+        // Envia o formulário (se for necessário fazer algo antes, como validação, etc.)
+        this.submit();
+
+        // Redireciona para a página desejada
+        window.location.href = "canSE.html";
+    });
+
         const meals = {
     "pequeno": [
         { name: "Opção 1", price: 2.5 },
@@ -499,7 +512,9 @@ h4{
     color: #333;
     margin-top: 10px;
 }
-    @media (min-width: 768px) and (max-width: 1024px) {
+
+/* Responsividade para Tablets (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
         .meal-price-container {
             flex-direction: column; /* Empilha o formulário e os preços em telas de tablets */
             width: 100%;
@@ -577,4 +592,5 @@ h4{
     }
 </style>
 </html>
+
 
