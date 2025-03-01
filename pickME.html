@@ -91,7 +91,7 @@
                         <button type="button" id="back-button">Regressar</button>
                     </a>
                     
-                    <button type="submit">Confirmar Refeições</button>
+                    <button type="submit" id="confirm-button">Confirmar Refeições</button>
                 </form>
         
                 <!-- Container para os preços -->
@@ -106,6 +106,17 @@
         </div>
 
     <script>
+        document.querySelector("form").addEventListener("submit", function(event) {
+        // Impede que o formulário seja enviado imediatamente (caso você queira fazer algo antes)
+        event.preventDefault();
+
+        // Envia o formulário (se for necessário fazer algo antes, como validação, etc.)
+        this.submit();
+
+        // Redireciona para a página desejada
+        window.location.href = "canME.html";
+    });
+
         const meals = {
     "pequeno-almoço": [
         { name: "Opção 1", price: 2.5 },
@@ -193,7 +204,8 @@ function updateMealPrice() {
 
     // Percorre todos os checkboxes de refeição
     document.querySelectorAll('.meal-checkbox').forEach(checkbox => {
-        const select = checkbox.parentNode.nextElementSibling;
+        const select = this.closest('.meal-options').querySelector(`select.${this.dataset.meal}`);
+
 
         // Se o checkbox está marcado
         if (checkbox.checked) {
@@ -497,7 +509,8 @@ h4{
     color: #333;
     margin-top: 10px;
 }
-    /* Responsividade para dispositivos móveis (menos de 768px) */
+
+/* Responsividade para dispositivos móveis (menos de 768px) */
 @media (max-width: 767px) {
     .container {
         flex-direction: column;
@@ -624,5 +637,6 @@ h4{
         font-size: 18px;
     }
 }
+
 </style>
 </html>
