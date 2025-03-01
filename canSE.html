@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <title>Escolha das Refeições</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .day-container { margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; }
+        .meal-options { display: flex; gap: 10px; margin-top: 5px; }
+        .meal-options select { display: none; }
+        .error { color: red; display: none; }
+    </style>
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+        
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
+                <a href="" class="navbar-brand p-0">
+                    <h1 class="text-primary m-0">
+                        <span class="text-eat">Eat</span><span class="text-simple">Simple</span>
+                    </h1>
+                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0 pe-4">
+                        <a href="about.html" class="nav-item nav-link">Sobre nós</a>
+                        <a href="index.html" class="nav-item nav-link">Menu</a>
+                        <a href="index.html" class="nav-item nav-link">Contacta-nos</a>
+                    </div>
+                    <a href="Order.html" class="btn btn-primary py-2 px-4">Encomendar</a>
+                </div>
+            </nav>
+
+            <div class="container-xxl py-5 bg-dark hero-header mb-5">
+                <div class="container text-center my-5 pt-5 pb-4">
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">Escolhe os dias do teu Plano Semanal</h1>
+                    <nav aria-label="breadcrumb">
+                        
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+        <div class="container33">
+            <h4>Se tiveres que alterar os dias embora já os tenhas selecionado, clica no botão </h4>
+            <button id="prev-next-month">Repetir</button>
+        </div>
+        
+
+         <!-- Calendar -->
+         <div class="container22">
+            <div class="calendar">
+                <div class="header">
+                    <button id="prev-month">◀</button>
+                    <h2 id="month-name">Março 2025</h2>
+                    <button id="next-month">▶</button>
+                </div>
+                <div class="days-of-week">
+                    <div>Dom</div>
+                    <div>Seg</div>
+                    <div>Ter</div>
+                    <div>Qua</div>
+                    <div>Qui</div>
+                    <div>Sex</div>
+                    <div>Sáb</div>
+                </div>
+                <div id="calendar-days" class="calendar-days"></div>
+            </div>
+            
+            <button type="submit2">Regressar</button>
+            <button type="submit">Confirmar Dias</button>
+            
+            
+        </div>
+        
+        
+    <!-- Footer Start -->
+
+    <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Empresa</h4>
+                    <a class="btn btn-link" href="">Sobre nós</a>
+                    <a class="btn btn-link" href="">Contacta-nos</a>
+                    <a class="btn btn-link" href="">Encomendar</a>
+                    <a class="btn btn-link" href="">Politica de privacidade</a>
+                    <a class="btn btn-link" href="">Termos e condições</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Contactos</h4>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+351 937097975</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>BeebsCooking@gmail.com</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Newsletter</h4>
+                    <p>Recebe todas as novidades e aproveita descontos exclusivos</p>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="#">EatSimple</a>, All Right Reserved. 
+                        
+                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                        Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="footer-menu">
+                            <a href="">Menu</a>
+                            <a href="">Help</a>
+                            <a href="">FQAs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="lib/wow/wow.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/counterup/counterup.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="lib/tempusdominus/js/moment.min.js"></script>
+<script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+
+
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
+</body>
+<style>
+
+
+/* Container que envolve o texto e o botão */
+.container33 {
+    display: flex; /* Usa o flexbox */
+    align-items: center; /* Alinha verticalmente os itens ao centro */
+    justify-content: flex-start; /* Alinha os itens à esquerda */
+    gap: 10px; /* Espaçamento entre o texto e o botão */
+    margin: 15px;
+}
+
+/* Estilo para o botão "Repetir" */
+#prev-next-month {
+    margin-left: 15px;
+    background-color: #7fbf91; /* Cor de fundo verde */
+    color: white; /* Cor do texto */
+    font-size: 16px; /* Tamanho da fonte */
+    font-weight: bold; /* Peso da fonte */
+    padding: 12px 20px; /* Espaçamento interno (padding) */
+    border: none; /* Remove a borda padrão */
+    border-radius: 8px; /* Bordas arredondadas */
+    cursor: pointer; /* Muda o cursor para mãozinha ao passar sobre o botão */
+    transition: background-color 0.3s, transform 0.2s; /* Transições suaves */
+    width: 15%;
+}
+
+/* Efeito de hover para o botão */
+#prev-next-month:hover {
+    background-color: #7fbf91; /* Cor de fundo mais escura quando o mouse passa por cima */
+    transform: scale(1.05); /* Leve aumento de tamanho ao passar o mouse */
+}
+
+/* Efeito de clique (active) para o botão */
+#prev-next-month:active {
+    background-color: rgb(32, 130, 55); /* Cor de fundo ainda mais escura ao clicar */
+    transform: scale(0.98); /* Leve redução de tamanho quando pressionado */
+}
+
+/* Efeito de foco para o botão (quando ele recebe o foco) */
+#prev-next-month:focus {
+    outline: none; /* Remove o contorno padrão de foco */
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.6); /* Sombra verde suave quando em foco */
+}
+
+
+
+
+button[type="submit"] {
+    
+    background: #ff9f1c;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 40%;
+    transition: background 0.3s;
+}
+
+button[type="submit"]:hover {
+    background: #ff7f00;
+}
+
+button[type="submit2"] {
+    margin: 20px;
+    background: #6c757d;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 40%;
+    transition: background 0.3s;
+}
+
+button[type="submit2"]:hover {
+    background: #545b62;
+}
+
+
+    /* Estilização geral do formulário */
+#meal-form {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: auto;
+}
+
+/* Contêiner dos dias */
+.day-container {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-left: 5px solid #ff9f1c;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Título dos dias */
+.day-container strong {
+    font-size: 18px;
+    color: #333;
+}
+
+
+
+p{
+    margin-top: 30px;
+
+}
+
+h4{
+    	margin-top: 10px;
+}
+
+/* Select estilizado */
+.meal-select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #fff;
+    display: none;
+}
+
+/* Mensagem de erro */
+#error-message {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Botão de envio */
+#meal-form button {
+    background: #ff9f1c;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s;
+}
+
+#meal-form button:hover {
+    background: #ff7f00;
+}
+
+.container22 {
+    display: flex;
+    flex-direction: column; /* Organiza os itens em coluna */
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+}
+
+#back-button {
+    background: #6c757d !important;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    width: auto;
+    margin-bottom: 10px;
+    transition: background 0.3s;
+    flex-shrink: 0; /* Impede que o botão encolha no layout flex */
+}
+
+
+
+#back-button:hover {
+    background: #545b62 !important; /* Cinza escuro */
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Adiciona espaçamento entre os dois contêineres */
+}
+
+.meal-form-container {
+    flex: 1; /* O formulário ocupa o restante do espaço */
+    padding: 20px;
+}
+
+
+.container {
+    display: flex;
+    justify-content: center; /* Centraliza o conteúdo */
+    padding: 20px;
+}
+
+.meal-price-container {
+    display: flex;
+    gap: 20px; /* Espaçamento entre o formulário e os preços */
+    background: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.meal-form-container {
+    flex: 0.7; /* O formulário ocupa 70% da largura */
+}
+
+.price-container {
+    flex: 0.3; /* A área de preços ocupa 30% da largura */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#price-per-day, #total-week-price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+}
+
+
+</style>
+</html>
+
+
+
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+.calendar {
+    width: 300px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.days-of-week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    width: 100%;
+}
+
+.day {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.day:hover {
+    background-color: #f0f0f0;
+}
+
+.selected {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.highlight {
+    background-color: #FFEB3B;
+    color: black;
+}
+
+.disabled {
+    color: #dcdcdc;
+    pointer-events: none;
+}
+
+</style>
+
+<script>
+    const daysOfWeek = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+const calendarDaysContainer = document.getElementById('calendar-days');
+const monthName = document.getElementById('month-name');
+const prevMonthBtn = document.getElementById('prev-month');
+const nextMonthBtn = document.getElementById('next-month');
+
+// Variáveis de controle de data
+let currentDate = new Date(); // Data inicial é a data de hoje
+let selectedDay = null;
+
+function renderCalendar() {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+
+    // Alterar nome do mês
+    monthName.textContent = `${currentDate.toLocaleString('pt-BR', { month: 'long' })} ${year}`;
+
+    // Obter o primeiro dia do mês e quantos dias tem no mês
+    const firstDayOfMonth = new Date(year, month, 1);
+    const lastDayOfMonth = new Date(year, month + 1, 0);
+    const numberOfDaysInMonth = lastDayOfMonth.getDate();
+    const firstDayOfWeek = firstDayOfMonth.getDay();
+
+    // Limpar calendário antes de renderizar
+    calendarDaysContainer.innerHTML = '';
+
+    // Adicionar os dias vazios antes do primeiro dia do mês
+    for (let i = 0; i < firstDayOfWeek; i++) {
+        const emptyDay = document.createElement('div');
+        calendarDaysContainer.appendChild(emptyDay);
+    }
+
+    // Adicionar os dias do mês
+    for (let day = 1; day <= numberOfDaysInMonth; day++) {
+        const dayDiv = document.createElement('div');
+        dayDiv.classList.add('day');
+        dayDiv.textContent = day;
+
+        dayDiv.addEventListener('click', () => {
+            if (selectedDay) {
+                selectedDay.classList.remove('selected');
+                const highlightedDays = document.querySelectorAll('.highlight');
+                highlightedDays.forEach(day => day.classList.remove('highlight'));
+            }
+            dayDiv.classList.add('selected');
+            selectedDay = dayDiv;
+            highlightNextDays(day);
+        });
+
+        calendarDaysContainer.appendChild(dayDiv);
+    }
+}
+
+function highlightNextDays(selectedDayNumber) {
+    const selectedDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), selectedDayNumber);
+    const highlightedDays = [];
+
+    // Verificar se já temos dias do próximo mês destacados
+    const highlightedNextMonthDays = document.querySelectorAll('.highlight[data-next-month="true"]');
+    const alreadyHighlighted = highlightedNextMonthDays.length > 0;
+
+    // Destacar o dia selecionado e os próximos 6 dias, considerando a troca de mês
+    for (let i = 0; i < 6; i++) {
+        const futureDate = new Date(selectedDate);
+        futureDate.setDate(selectedDate.getDate() + i);
+
+        const futureMonth = futureDate.getMonth();
+        const futureDay = futureDate.getDate();
+
+        // Se o mês mudou, então é um dia do mês seguinte
+        if (futureMonth !== currentDate.getMonth()) {
+            // Se já houver dias destacados do próximo mês, evitar recriar
+            if (alreadyHighlighted) {
+                continue; // Se já temos os dias do próximo mês, não criamos novos
+            }
+
+            // Destacar os dias do mês seguinte
+            const futureDayDiv = document.createElement('div');
+            futureDayDiv.classList.add('day', 'highlight');
+            futureDayDiv.textContent = futureDay;
+            futureDayDiv.setAttribute('data-next-month', 'true'); // Atributo para identificar os dias do próximo mês
+
+            // Adicionar o dia ao final do calendário
+            calendarDaysContainer.appendChild(futureDayDiv);
+            highlightedDays.push(futureDayDiv);
+        } else {
+            // Destacar os dias do mês atual
+            const futureDayDiv = calendarDaysContainer.children[futureDate.getDate() + (currentDate.getDay() === 0 ? 6 : currentDate.getDay())];
+            if (futureDayDiv) {
+                futureDayDiv.classList.add('highlight');
+                highlightedDays.push(futureDayDiv);
+            }
+        }
+    }
+}
+
+// Mudar o mês
+prevMonthBtn.addEventListener('click', () => {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    renderCalendar();
+});
+
+nextMonthBtn.addEventListener('click', () => {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    renderCalendar();
+});
+
+renderCalendar();
+
+
+document.getElementById('prev-next-month').addEventListener('click', function() {
+    // Ir para o mês anterior
+    const prevMonthButton = document.getElementById('prev-month');
+    prevMonthButton.click();
+
+    // Ir para o mês seguinte
+    const nextMonthButton = document.getElementById('next-month');
+    nextMonthButton.click();
+});
+
+
+
+
+</script>
