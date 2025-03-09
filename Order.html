@@ -87,7 +87,7 @@
                         <option value="cut">Cut (Definição)</option>
                         <option value="manutencao">Manutenção</option>
                     </select>
-			<input type="number" placeholder="Peso (Kg)">
+                    <input type="number" placeholder="Peso (Kg)">
                 </div>
                 <div class="form-group">
                     <input type="number" placeholder="Idade">
@@ -100,14 +100,14 @@
                 <div class="form-group">
                     <input type="email" placeholder="Email">
                 </div>
-                <div class="form-group">
+                
                     <select class="form-control" name="Nível de atividade física" required>
                         <option value="">Selecione Nível de atividade física...</option>
                         <option value="regular">Regular</option>
                         <option value="sedent">Sedentário</option>
                         <option value="atleta">Atleta</option>
                     </select>
-                </div>
+                
                 <button class="btn-next">Próximo</button>
             </div>
             <img src="img/dev.avif" alt="Free Delivery">
@@ -157,8 +157,10 @@
 
             .btn-next {
                 background: #4CAF50;
+                margin-top: 10px;
                 color: white;
                 border: none;
+                padding-top: 10px;
                 padding: 10px 20px;
                 border-radius: 5px;
                 cursor: pointer;
@@ -212,9 +214,6 @@ document.querySelector("#continue-plan").addEventListener("click", function () {
     const selectedPlan = document.querySelector(".plan-btn.selected");
 
     if (selectedPlan && selectedPlan.getAttribute("data-plan") === "semanal") {
-        // Se o plano selecionado for "Plano Semanal", redireciona para "pick.html"
-        window.location.href = "pickSE.html";
-    } if (selectedPlan && selectedPlan.getAttribute("data-plan") === "semanal") {
         // Se o plano selecionado for "Plano Semanal", redireciona para "pick.html"
         window.location.href = "pickSE.html";
     } if (selectedPlan && selectedPlan.getAttribute("data-plan") === "personalizado") {
@@ -412,63 +411,6 @@ document.querySelector("#continue-plan").addEventListener("click", function () {
     }
 }
 
-/* Ajustes para telas médias (tablets) */
-@media (max-width: 1024px) and (min-width: 768px) {
-    .form-control{
-        width: 100%;
-    }
-    .form-container {
-        flex-direction: row; /* Retorna para layout em linha para tablets */
-        padding: 30px;
-    }
-
-    .form-group {
-        flex-direction: row; /* Mantém os itens do formulário em linha */
-    }
-
-    .form-group input,
-    .form-group select {
-        width: 48%; /* Diminui a largura para dar espaçamento */
-    }
-
-    img {
-        width: 250px; /* Ajusta a imagem para não ocupar tanto espaço */
-        margin-left: 30px;
-    }
-
-    .btn-next {
-        width: auto; /* O botão volta ao tamanho padrão */
-    }
-}
-	@media (max-width: 767px) {
-    .form-container {
-        flex-direction: column; /* Coloca os itens do formulário em uma coluna */
-        padding: 20px; /* Menos padding para caber melhor em telas pequenas */
-        margin-top: 20px; /* Adiciona um pouco de espaçamento acima */
-    }
-
-    .form-group {
-        flex-direction: column; /* Alinha os itens verticalmente */
-        margin-bottom: 10px; /* Diminui o espaço entre os campos */
-    }
-
-    .form-group input,
-    .form-group select {
-        width: 100%; /* Garante que os campos de input e select ocupem toda a largura disponível */
-    }
-
-    img {
-        width: 60%; /* Faz com que a imagem ocupe toda a largura disponível na tela */
-        margin-left: 0; /* Remove o margin esquerdo */
-        margin-top: 20px; /* Dá um espaçamento superior para a imagem */
-    }
-
-    .btn-next {
-        width: 100%; /* Faz com que o botão "Próximo" ocupe toda a largura */
-        padding: 12px; /* Aumenta o tamanho do botão para facilitar o clique */
-    }
-}
-
 /* Estilos Gerais */
 body {
     font-size: 16px;
@@ -636,7 +578,12 @@ body {
         font-size: 18px;
     }
 }
+
+
+
 </style>
 </html>
+
+
 
 
